@@ -9,14 +9,15 @@ export class TodoListController {
   // 新增任务
   @Post('/addTask')
   async addTask(@Req() req:any): Promise<any> {
+    console.log('req======', req)
     let todoList = new TodoList();
-    todoList.name = req.query.name;
-    todoList.status = req.query.status;
+    todoList.name = req.body.name;
+    todoList.status = req.body.status;
     return this.todoListService.addTask(todoList);
   }
 
   // 获取所有任务
-  @Get()
+  @Get('/getTask')
   async getTask() {
     return this.todoListService.getTask();
   }

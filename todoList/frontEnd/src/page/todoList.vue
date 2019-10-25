@@ -9,8 +9,8 @@
       </div>
       <div class="list">
         <h3>任务列表</h3>
-        <ul v-for="item in taskList" :key="item.label">
-          <li><span></span><p>{{item.value}}</p></li>
+        <ul v-for="item in taskList" :key="item._id">
+          <li><span></span><p>{{item.name}}</p></li>
         </ul>
       </div>
     </div>
@@ -23,21 +23,22 @@ export default {
   data() {
     return {
       task: '',
-      taskList: [
-        { label: '01', value: '学习'},
-        { label: '02', value: '吃饭'},
-        { label: '03', value: '看电影'},
-        { label: '04', value: '玩游戏'},
-        { label: '05', value: '写笔记'},
-        { label: '06', value: '读书'},
-      ]
+      taskList: []
     }
   },
   methods: {
-    addTask() {
-      console.log('添加任务'); 
+    async addTask() {
+      let data = {
+        name: this.task,
+        status: 0
+      }
+      await this.$store.dispatch('addTask', data)
     }
-  }
+  },
+  async mounted() {
+    let res = await this.$store.dispatch('getTask')
+    this.taskList = res.data
+  },
 }
 </script>
 
