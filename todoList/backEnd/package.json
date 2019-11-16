@@ -15,7 +15,7 @@
     "@nestjs/platform-express": "^6.8.2",
     "@nestjs/testing": "^6.8.2",
     "@nestjs/websockets": "^6.8.2",
-    "mongoose": "^5.7.3",
+    "mongoose": "^5.7.5",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
     "ts-node": "^8.4.1",
