@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './src/router'
+import router from './router'
 import store from './store'
+import Toast from './plugins/toast'
+
+Vue.use(Toast)
 
 new Vue({
   el: "#app", 

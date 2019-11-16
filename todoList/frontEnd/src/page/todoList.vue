@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import validatorUtils from '../utils/validator-utils'
+
 export default {
   data() {
     return {
@@ -28,16 +30,30 @@ export default {
   },
   methods: {
     async addTask() {
-      let data = {
-        name: this.task,
-        status: 0
+      console.log('validatorUtils(this.task)',validatorUtils.checkTodoListName(this.task))
+      if (!validatorUtils.checkEmpty(this.task) && validatorUtils.checkTodoListName(this.task)) {
+        let data = {
+          name: this.task,
+          status: 0
+        }
+        await this.$store.dispatch('addTask', data).then((res) => {
+          this.getTask();
+          this.$toast(res.data.message || '添加成功')
+          this.task = '';
+        }).catch((err) => {
+          this.$toast('添加失败')
+          console.log(err)
+        })
       }
-      await this.$store.dispatch('addTask', data)
+      
+    },
+    async getTask() {
+      let res = await this.$store.dispatch('getTask')
+      this.taskList = res.data
     }
   },
   async mounted() {
-    let res = await this.$store.dispatch('getTask')
-    this.taskList = res.data
+    this.getTask();
   },
 }
 </script>

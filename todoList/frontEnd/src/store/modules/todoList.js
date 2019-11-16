@@ -1,4 +1,4 @@
-import todoListApi from '../../src/api/todoList'
+import todoListApi from '../../api/todoList'
 
 export default {
   state: {},

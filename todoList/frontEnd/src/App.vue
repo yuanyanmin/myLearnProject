@@ -6,7 +6,7 @@
 
 
 <script>
-import './src/assets/less/reset.less'
+import './assets/less/reset.less'
 
 export default {
   name: 'App'
