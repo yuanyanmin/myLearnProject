@@ -9,7 +9,6 @@ export class TodoListController {
   // 新增任务
   @Post('/addTask')
   async addTask(@Req() req:any): Promise<any> {
-    console.log('req======', req)
     let todoList = new TodoList();
     todoList.name = req.body.name;
     todoList.status = req.body.status;
@@ -20,5 +19,11 @@ export class TodoListController {
   @Get('/getTask')
   async getTask() {
     return this.todoListService.getTask();
+  }
+
+  // 修改任务状态
+  @Post('/updateTask')
+  async updateTask(@Req() req:any) {
+    return this.todoListService.updateTask(req.body.id);
   }
 }

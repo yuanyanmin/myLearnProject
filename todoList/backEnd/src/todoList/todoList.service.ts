@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common'
 import { TodoList } from '../vo/todoList.vo'
+import { ProcessException } from '../exception/process.exception'
 
 @Injectable()
 export class TodoListService {
@@ -39,5 +40,21 @@ export class TodoListService {
       data: result,
       status: 'success'
     }
+  }
+
+  async updateTask(id: string): Promise<any> {
+    let reqStartTime = Date.now()
+    let task = await this.todoListModel.findOne({_id: id});
+    let res = await this.todoListModel.updateOne({_id: id}, {$set:{ status: 1 }})
+    return {
+      useTime: Date.now() - reqStartTime,
+      data: res,
+      status: 'success'
+    }
+    // if (task) {
+    //   await this.todoListModel.updateOne({_id: id}, {$set:{ status: 1 }})
+    // } else {
+    //   throw new ProcessException('未找到相应任务')
+    // }
   }
 }

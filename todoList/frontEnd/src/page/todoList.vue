@@ -10,7 +10,10 @@
       <div class="list">
         <h3>任务列表</h3>
         <ul v-for="item in taskList" :key="item._id">
-          <li><span></span><p>{{item.name}}</p></li>
+          <li @click="completeTask(item)">
+            <span :class="{'checkStatus' : item.status}"></span>
+            <p :class="{'checkStatus' : item.status}">{{item.name}}</p>
+          </li>
         </ul>
       </div>
     </div>
@@ -25,7 +28,7 @@ export default {
   data() {
     return {
       task: '',
-      taskList: []
+      taskList: [],
     }
   },
   methods: {
@@ -50,6 +53,15 @@ export default {
     async getTask() {
       let res = await this.$store.dispatch('getTask')
       this.taskList = res.data
+    },
+
+    async completeTask(item) {
+      if (item.status == 0) {
+        await this.$store.dispatch('updateTask', {id: item._id})
+        this.getTask();
+      }
+
+      
     }
   },
   async mounted() {
@@ -114,11 +126,25 @@ export default {
               float: left;
               width: 70px;
               height: 70px;
-              background-color: #9fc9bf;
+              background-color: #9fc9bf;             
             }
-            p {
+            span.checkStatus {       
+              &::after {
+                content: "√";
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                margin: 20px 20px;
+                text-align: center;
+                line-height: 30px;
+              }
+            }
+            p {    
               padding-left: 85px;
               line-height: 70px;
+            }
+            p.checkStatus {
+              text-decoration: line-through;
             }
           }
         }

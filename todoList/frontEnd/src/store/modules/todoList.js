@@ -11,6 +11,10 @@ export default {
     getTask({state, commit, dispatch, rootState}, data) {
       let res = todoListApi.getTask(data);
       return res;
+    },
+    updateTask({state, commit, dispatch, rootState}, data) {
+      let res = todoListApi.updateTask(data);
+      return res;
     }
   }
 }
