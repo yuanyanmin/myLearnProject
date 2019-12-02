@@ -4,16 +4,16 @@ export default {
   state: {},
   mutations: {},
   actions: {
-    addTask({state, commit, dispatch, rootState}, data) {
-      let res = todoListApi.addTask(data);
+    async addTask({state, commit, dispatch, rootState}, data) {
+      let res = await todoListApi.addTask(data);
       return res;
     },
-    getTask({state, commit, dispatch, rootState}, data) {
-      let res = todoListApi.getTask(data);
+    async getTask({state, commit, dispatch, rootState}, data) {
+      let res = await todoListApi.getTask(data);
       return res;
     },
-    updateTask({state, commit, dispatch, rootState}, data) {
-      let res = todoListApi.updateTask(data);
+    async updateTask({state, commit, dispatch, rootState}, data) {
+      let res = await todoListApi.updateTask(data);
       return res;
     }
   }

@@ -20,7 +20,7 @@ const handleCatch = function (error) {
   return Promise.reject({
     status: error.status ? error.status : 'fail',
     message: msg,
-    errorCode: error.code || 'UNKONWN_ERROR'
+    errorCode: error.code || 'UNKNOW_ERROR'
   })
 }
 
