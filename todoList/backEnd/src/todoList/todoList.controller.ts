@@ -1,6 +1,5 @@
 import { Controller, Get, Post, Body, Req, UseInterceptors } from '@nestjs/common'
 import { TodoListService } from './todoList.service'
-import { TodoList } from 'src/vo/todoList.vo';
 import { ProcessException } from '../exception/process.exception'
 import { TransResult } from '../interceptor/trans-result.interceptor'
 
@@ -11,10 +10,10 @@ export class TodoListController {
 
   // 新增任务
   @Post('/addTask')
-  async addTask(@Req() req:any): Promise<any> {
+  async addTask(@Body() todoList:any, @Req() req:any): Promise<any> {
     try {
-      let todoList = new TodoList();
-      let res = await this.todoListService.addTask(todoList)
+      // let todoList = new TodoList();
+      let res = await this.todoListService.addTask(todoList, {req})
       return {
         id: res._id
       }

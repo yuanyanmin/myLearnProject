@@ -5,13 +5,18 @@ import { TodoList } from '../vo/todoList.vo'
 export class TodoListService {
   constructor(@Inject('TodoListModelToken') private readonly todoListModel) {}
   
-  async addTask(task) {
+  async addTask(param: {
+    status: number,
+    name: string
+  }, context: any): Promise<TodoList> {
+    let task: any = {};
+    task.status = param.status;
+    task.name = param.name;
     let result = await this.todoListModel.create(task);
     return result;
   }
 
   async getTask() {
-    let reqStartTime = Date.now()
     let res = await this.todoListModel.find().exec();
     let result: TodoList[] = [];
     res.forEach(item => {
