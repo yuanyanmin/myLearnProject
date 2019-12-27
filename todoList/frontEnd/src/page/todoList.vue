@@ -13,6 +13,7 @@
           <li @click="completeTask(item)">
             <span :class="{'checkStatus' : item.status}"></span>
             <p :class="{'checkStatus' : item.status}">{{item.name}}</p>
+            <p class="delStatus" @click="delTask(item)">删除</p>
           </li>
         </ul>
       </div>
@@ -59,9 +60,12 @@ export default {
       if (item.status == 0) {
         await this.$store.dispatch('updateTask', {id: item._id})
         this.getTask();
-      }
+      }      
+    },
 
-      
+    async delTask(item) {
+      let res = await this.$store.dispatch('delTask', {id: item._id})
+      this.getTask();
     }
   },
   async mounted() {
@@ -122,6 +126,7 @@ export default {
             height: 70px;
             background-color: #e6edec;
             margin-bottom: 35px;
+            position: relative;
             span {
               float: left;
               width: 70px;
@@ -145,6 +150,13 @@ export default {
             }
             p.checkStatus {
               text-decoration: line-through;
+            }
+            p.delStatus {
+              position: absolute;
+              top: 0;
+              right: 10px;
+              color: blue;
+              cursor: pointer;
             }
           }
         }

@@ -41,4 +41,14 @@ export class TodoListController {
       throw new ProcessException('任务不存在');
     });
   }
+
+  // 删除任务
+  @Post('/delTask')
+  async delTask(@Req() req:any) {
+    await this.todoListService.findTask(req.body.id).then(res => {
+      return this.todoListService.delTask(req.body.id)
+    }).catch(err => {
+      throw new ProcessException('任务不存在');
+    });
+  } 
 }

@@ -36,4 +36,8 @@ export class TodoListService {
   async updateTask(taskId: string): Promise<void> {
     return await this.todoListModel.updateOne({_id: taskId}, {$set:{ status: 1 }})
   }
+
+  async delTask(taskId: string): Promise<void> {
+    return await this.todoListModel.remove({_id: taskId})
+  }
 }
