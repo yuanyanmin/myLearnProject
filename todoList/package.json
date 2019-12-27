@@ -1,0 +1,13 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "todoList entry",
+  "author": "yuanyanmin",
+  "private": true,
+  "scripts": {
+    "i": "cd frontEnd && npm install && cd backEnd && npm install",
+    "dev": "cd frontEnd && npm run dev",
+    "build": "cd frontEnd && npm run build",
+    "start": "cd backEnd && npm run start"
+  }
+}
